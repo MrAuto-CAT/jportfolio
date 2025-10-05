@@ -3,6 +3,10 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --nav-bg: rgba(255,255,255,0.85);
+  --nav-text: var(--foreground);
+  --nav-active-bg: var(--foreground);
+  --nav-active-text: var(--background);
 }
 
 @theme inline {
@@ -16,6 +20,10 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --nav-bg: rgba(10,10,10,0.7);
+    --nav-text: var(--foreground);
+    --nav-active-bg: var(--foreground);
+    --nav-active-text: var(--background);
   }
 }
 
@@ -23,6 +31,33 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* smooth scrolling for anchor navigation */
+html {
+  scroll-behavior: smooth;
+}
+
+/* navbar helper classes when using CSS variables */
+.nav-shell {
+  background: var(--nav-bg);
+  color: var(--nav-text);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.nav-item {
+  padding: 0.4rem 0.9rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.nav-item:focus {
+  outline: 2px solid rgba(0,0,0,0.12);
+  outline-offset: 2px;
+}
+.nav-active {
+  background: var(--nav-active-bg);
+  color: var(--nav-active-text);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
 
 /* Full-screen sections and scroll snapping */
