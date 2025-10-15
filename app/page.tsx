@@ -7,30 +7,29 @@ import Footer from "../components/Footer";
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       <Navbar />
-      <main className="snap-y">
+      <main className="relative">
         <section id="home" className="section full-width">
-          <div className="container">
+          <div className="container-custom">
             <Hero />
           </div>
         </section>
 
         <section id="projects" className="section full-width">
-          <div className="container">
-            <h2 className="text-2xl font-semibold mb-6">Projects</h2>
+          <div className="container-custom">
             <ProjectsCarousel />
           </div>
         </section>
 
         <section id="testimonials" className="section full-width">
-          <div className="container">
+          <div className="container-custom">
             <Testimonials />
           </div>
         </section>
 
         <section id="contact" className="section full-width">
-          <div className="container">
+          <div className="container-custom">
             <Contact />
           </div>
         </section>

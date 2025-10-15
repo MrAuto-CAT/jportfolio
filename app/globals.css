@@ -1,12 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --nav-bg: rgba(255,255,255,0.85);
+  --background: #fafafa;
+  --foreground: #1a1a1a;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --secondary: #64748b;
+  --accent: #f1f5f9;
+  --border: #e2e8f0;
+  --nav-bg: rgba(255,255,255,0.95);
   --nav-text: var(--foreground);
-  --nav-active-bg: var(--foreground);
-  --nav-active-text: var(--background);
+  --nav-active-bg: var(--primary);
+  --nav-active-text: #ffffff;
+  --card-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --card-shadow-hover: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
 @theme inline {
@@ -18,19 +25,27 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --nav-bg: rgba(10,10,10,0.7);
+    --background: #0f172a;
+    --foreground: #f8fafc;
+    --primary: #3b82f6;
+    --primary-hover: #2563eb;
+    --secondary: #94a3b8;
+    --accent: #1e293b;
+    --border: #334155;
+    --nav-bg: rgba(15, 23, 42, 0.95);
     --nav-text: var(--foreground);
-    --nav-active-bg: var(--foreground);
-    --nav-active-text: var(--background);
+    --nav-active-bg: var(--primary);
+    --nav-active-text: #ffffff;
+    --card-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
+    --card-shadow-hover: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
 }
 
 /* smooth scrolling for anchor navigation */
@@ -41,23 +56,258 @@ html {
 /* navbar helper classes when using CSS variables */
 .nav-shell {
   background: var(--nav-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   color: var(--nav-text);
-  border: 1px solid rgba(0,0,0,0.06);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  box-shadow: var(--card-shadow);
 }
+
 .nav-item {
-  padding: 0.4rem 0.9rem;
-  border-radius: 9999px;
-  font-weight: 600;
-  transition: transform .12s ease, box-shadow .12s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  color: var(--foreground);
 }
+
+.nav-item:hover {
+  background: var(--accent);
+  transform: translateY(-1px);
+}
+
 .nav-item:focus {
-  outline: 2px solid rgba(0,0,0,0.12);
+  outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
+
 .nav-active {
   background: var(--nav-active-bg);
   color: var(--nav-active-text);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  box-shadow: var(--card-shadow-hover);
+}
+
+/* Mobile Navigation Styles */
+.mobile-menu-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.mobile-menu-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  width: 24px;
+  height: 18px;
+  justify-content: space-between;
+}
+
+.hamburger-line {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--foreground);
+  border-radius: 1px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.mobile-menu {
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-closed {
+  max-height: 0;
+  opacity: 0;
+}
+
+.mobile-menu-open {
+  max-height: 300px;
+  opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  .nav-shell {
+    border-radius: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    transform: none;
+    width: 100%;
+  }
+  
+  .nav-item {
+    padding: 0.75rem 1rem;
+    display: block;
+    width: 100%;
+    text-align: center;
+    border-radius: 8px;
+    margin: 0.25rem 0;
+  }
+}
+
+/* Ensure proper spacing for mobile navbar */
+@media (max-width: 767px) {
+  body {
+    padding-top: 0;
+  }
+  
+  .section {
+    padding-top: 5rem;
+  }
+}
+
+/* Image styling for consistent appearance */
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
+/* Ensure images maintain aspect ratio and cover container */
+img[class*="object-cover"] {
+  object-fit: cover;
+}
+
+img[class*="rounded-full"] {
+  border-radius: 50%;
+}
+
+/* Profile image consistency */
+.profile-image {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* Project image consistency */
+.project-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Professional card styling */
+.professional-card {
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s ease;
+  padding: 1.5rem;
+}
+
+.professional-card:hover {
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-2px);
+}
+
+/* Section styling */
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.section-subtitle {
+  color: var(--secondary);
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+}
+
+/* Button styling */
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--card-shadow-hover);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--foreground);
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background: var(--accent);
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+
+/* Typography improvements */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--foreground);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+p {
+  color: var(--secondary);
+  line-height: 1.6;
+}
+
+/* Layout improvements */
+.container-custom {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section-spacing {
+  padding: 4rem 0;
+}
+
+/* Mobile responsive improvements */
+@media (max-width: 768px) {
+  .professional-card {
+    padding: 1rem;
+  }
+  
+  .section-title {
+    font-size: 1.75rem;
+  }
+  
+  .container-custom {
+    padding: 0 1rem;
+  }
+  
+  .section-spacing {
+    padding: 2rem 0;
+  }
 }
 
 /* Full-screen sections and scroll snapping */
