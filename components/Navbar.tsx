@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import ThemeToggle from "./ThemeToggle";
 
 const NAV_ITEMS = [
   { id: "home", label: "Home" },
@@ -44,22 +45,25 @@ export default function Navbar() {
     <>
       {/* Desktop Navigation */}
       <nav className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 nav-shell px-3 py-2 shadow hidden md:block" aria-label="Primary">
-        <ul className="flex gap-3 items-center">
-          {NAV_ITEMS.map((item) => {
-            const isActive = active === item.id;
-            return (
-              <li key={item.id}>
-                <a
-                  href={`#${item.id}`}
-                  className={`nav-item ${isActive ? "nav-active" : "hover:scale-[1.03]"}`}
-                  aria-current={isActive ? "page" : undefined}
-                >
-                  {item.label}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
+        <div className="flex items-center gap-4">
+          <ul className="flex gap-3 items-center">
+            {NAV_ITEMS.map((item) => {
+              const isActive = active === item.id;
+              return (
+                <li key={item.id}>
+                  <a
+                    href={`#${item.id}`}
+                    className={`nav-item ${isActive ? "nav-active" : "hover:scale-[1.03]"}`}
+                    aria-current={isActive ? "page" : undefined}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+          <ThemeToggle />
+        </div>
       </nav>
 
       {/* Mobile Navigation */}
@@ -67,19 +71,22 @@ export default function Navbar() {
         <div className="flex justify-between items-center">
           <span className="font-bold text-lg">Portfolio</span>
           
-          {/* Hamburger Button */}
-          <button
-            onClick={toggleMenu}
-            className="mobile-menu-btn p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2"
-            aria-expanded={isMenuOpen}
-            aria-label="Toggle navigation menu"
-          >
-            <div className="hamburger">
-              <span className={`hamburger-line ${isMenuOpen ? 'rotate-45 translate-y-1' : ''}`}></span>
-              <span className={`hamburger-line ${isMenuOpen ? 'opacity-0' : ''}`}></span>
-              <span className={`hamburger-line ${isMenuOpen ? '-rotate-45 -translate-y-1' : ''}`}></span>
-            </div>
-          </button>
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+            {/* Hamburger Button */}
+            <button
+              onClick={toggleMenu}
+              className="mobile-menu-btn p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2"
+              aria-expanded={isMenuOpen}
+              aria-label="Toggle navigation menu"
+            >
+              <div className="hamburger">
+                <span className={`hamburger-line ${isMenuOpen ? 'rotate-45 translate-y-1' : ''}`}></span>
+                <span className={`hamburger-line ${isMenuOpen ? 'opacity-0' : ''}`}></span>
+                <span className={`hamburger-line ${isMenuOpen ? '-rotate-45 -translate-y-1' : ''}`}></span>
+              </div>
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu Items */}
